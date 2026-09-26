@@ -1,0 +1,25 @@
+# dsh-turn-speed bundle patch: contributes one loader row.
+#
+# The `name` (bare package specifier) resolves to this package's
+# main/exports["."] (lib/index.js) via the loader's two-anchor resolution
+# (dsh install first, then the profile's node_modules). The browser half is
+# picked up from package.json's `dsh.client` declaration and served through
+# exports["./client"].
+#
+# The node half mounts the loopback diagnostics route `/turn-speed-api`, and
+# the browser half injects this-turn rows into the shipped 会话统计 dialog and
+# reports its state there. Verify from a terminal after a restart:
+#
+#   curl http://127.0.0.1:3080/turn-speed-api/health
+#   curl http://127.0.0.1:3080/turn-speed-api/state
+#
+# Install:   dsh plugin --profile web add github:suufon/dsh-turn-speed
+# Local dev: dsh plugin --profile web add link:<a space-free local path>
+# (`link:` specs reach pnpm through a shell, so a path containing spaces would
+#  be split into separate arguments — use a junction when the path has spaces)
+#
+# Restart `dsh web` afterwards: the client boot manifest is composed at server
+# start, so a new plugin cannot appear from a page refresh alone.
+- insert:
+    - id: dsh-turn-speed
+      name: dsh-turn-speed

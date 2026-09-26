@@ -1,0 +1,52 @@
+{
+  "name": "dsh-turn-speed",
+  "description": "DeepSeek Harness (DSH) 插件：在「会话统计」弹窗里追加本轮的输出速度（TPS）等行——decode 口径与端到端口径并存，并附 TTFT 平均、用时、输出 tokens、步数与轮次，直接排在官方「输出速度（TPS）」行下方，口径与官方投影逐项一致。",
+  "version": "0.2.0",
+  "type": "module",
+  "author": "suufon",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suufon/dsh-turn-speed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/suufon/dsh-turn-speed/issues"
+  },
+  "homepage": "https://github.com/suufon/dsh-turn-speed#readme",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "tps",
+    "turn-speed",
+    "session-stats"
+  ],
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime"
+      ]
+    }
+  },
+  "files": [
+    "cordis.patch.yml",
+    "lib/index.js",
+    "lib/client.js",
+    "scripts/verify.mjs",
+    "README.md"
+  ],
+  "license": "MIT"
+}
